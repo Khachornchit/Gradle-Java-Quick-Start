@@ -30,3 +30,65 @@ dependencies {
 
 // Define the main class for the application
 mainClassName = 'GradleJavaQuickStart.App'
+
+
+class Greeting extends DefaultTask {  
+    String message 
+    String recipient
+
+    @TaskAction 
+    void sayGreeting() {
+        println "${message}, ${recipient}!" 
+    }
+}
+
+tasks.register("hello", Greeting) { 
+    group = 'Welcome'
+    description = 'Produces a world greeting'
+    message = 'Hello' 
+    recipient = 'World'
+}
+
+task task1 {
+
+	group "group1"
+	description "Description for task1()"
+	doLast {
+		println "Executed task1().";
+	}
+	
+}
+
+task task2 {
+
+	group "group1"
+	description "Description for task2()"
+	doLast {
+		println "Executed task2().";
+	}
+	
+}
+
+task copyFile(type: Copy) {
+
+	group "group2"
+	description "Description for copyFile()"
+	from 'C:\\Core\\test1\\data.txt'
+	into 'C:\\Core\\test2'
+	doLast {
+		println "Executed copyFile() task.";
+	}	
+}
+
+task greeting {
+
+	group "group3"
+	description "Description for greeting()"
+	doFirst {
+		println "Good morning from greeting task doFirst() !"
+	}
+	
+	doLast {
+		println "Good morning from greeting task doLast() !"
+	}
+}
